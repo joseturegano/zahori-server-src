@@ -14,12 +14,25 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        java-version: ['17']
+        distribution: ['temurin']
+
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
+    - name: Set up JDK ${{ matrix.java-version }}
       uses: actions/setup-java@v3
       with:
-        java-version: '17'
-        distribution: 'adopt'
+        java-version: ${{ matrix.java-version }}
+        distribution: ${{ matrix.distribution }}
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
     - name: Build with Maven
-      run: cd backend && mvn -B package --file pom.xml
+      run: cd backend && mvn -B clean package --file pom.xml
+
