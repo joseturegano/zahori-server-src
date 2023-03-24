@@ -1,5 +1,5 @@
 # base image
-FROM node:14.18.3-alpine as angularbuilder
+FROM node:14.21.3-alpine as angularbuilder
 
 RUN npm install -g @angular/cli@11.2.10
 
