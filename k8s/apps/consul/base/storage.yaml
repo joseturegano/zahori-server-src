@@ -1,0 +1,18 @@
+# kind: PersistentVolume
+# apiVersion: v1
+# metadata:
+#   name: consul-pv
+#   labels:
+#     app: consul
+#     type: local
+# spec:
+#   storageClassName: null
+# ---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: consul-pv-claim
+  labels:
+    app: consul
+spec:
+  storageClassName: null

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: consul
+  name: consul
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: consul
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "300m"
+            limits:
+              memory: "500Mi"
+              cpu: "1000m"            

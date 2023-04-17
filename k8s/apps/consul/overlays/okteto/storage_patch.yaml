@@ -1,0 +1,28 @@
+# kind: PersistentVolume
+# apiVersion: v1
+# metadata:
+#   name: consul-pv
+#   labels:
+#     app: consul
+#     type: local
+# spec:
+#   capacity:
+#     storage: 1Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: /var/consul-dev/data
+# ---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: consul-pv-claim
+  labels:
+    app: consul
+spec:
+  capacity:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

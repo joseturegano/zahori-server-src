@@ -1,0 +1,25 @@
+resources:
+  - ../../base
+
+patchesStrategicMerge:
+  - memorylimit_patch.yaml
+  - storage_patch.yaml
+  - service_patch.yaml
+
+images:
+  - name: consul
+    newTag: "1.15.0"
+
+#vars:
+#  - name: ZAHORI_CONSUL_HOST
+#    objref:
+#      kind: Service
+#      name: consul-service
+#      apiVersion: v1
+#fieldPath: spec.clusterIP
+# - name: ZAHORI_CONSUL_PORT
+#   objref:
+#     kind: Service
+#     name: consul-service
+#     apiVersion: v1
+#     #fieldPath: spec.ports[?(@.name=="http")].targetPort

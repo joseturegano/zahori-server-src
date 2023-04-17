@@ -1,0 +1,18 @@
+# kind: PersistentVolume
+# apiVersion: v1
+# metadata:
+#   name: postgres-pv
+#   labels:
+#     app: postgres
+#     type: local
+# spec:
+#   storageClassName: null
+# ---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-pv-claim
+  labels:
+    app: postgres
+spec:
+  storageClassName: null

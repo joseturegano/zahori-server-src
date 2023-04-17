@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consul
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consul
+  template:
+    metadata:
+      labels:
+        app: consul
+    spec:
+      containers:
+        - args:
+            - agent
+            - -server
+            - -ui
+            - -bootstrap-expect=1
+            - -client=0.0.0.0
+            - -bind=0.0.0.0
+          image: consul:1.15.0
+          name: consul
+          ports:
+            - containerPort: 8500
+              name: http
+            - containerPort: 8300
+              name: server
+            - containerPort: 8600
+              name: dns
+          # volumeMounts:
+          #   - mountPath: /etc/consul/config
+          #     name: config
+          # - mountPath: /consul/data
+          #   name: consul-pv-claim
+          # livenessProbe:
+          #   httpGet:
+          #     path: /v1/health/state/critical
+          #     port: http
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /v1/health/state/any
+          #     port: http
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+      volumes:
+        - configMap:
+            name: consul-config
+          name: config
+        - name: consul-pv-claim
+          persistentVolumeClaim:
+            claimName: consul-pv-claim

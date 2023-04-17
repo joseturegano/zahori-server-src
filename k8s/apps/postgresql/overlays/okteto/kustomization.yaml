@@ -1,0 +1,20 @@
+---
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: postgresql-pass
+    literals:
+      - POSTGRES_PASSWORD=zahori
+
+resources:
+  - ../../base
+
+patchesStrategicMerge:
+  - storage_patch.yaml
+
+namespace: default
+
+images:
+  - name: postgres
+    newTag: "12.14-alpine"

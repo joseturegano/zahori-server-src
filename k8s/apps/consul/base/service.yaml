@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: consul-service
+  labels:
+    app: consul
+spec:
+  selector:
+    app: consul
+  ports:
+    - name: http
+      port: 8500
+      targetPort: 8500
+    # - name: server
+    #   port: 8300
+    #   targetPort: 8300
+    # - name: dns
+    #   port: 8600
+    #   targetPort: 8600
+  type: ClusterIP

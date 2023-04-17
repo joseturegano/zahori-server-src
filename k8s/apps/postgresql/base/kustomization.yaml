@@ -1,0 +1,22 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    app: postgres      
+
+resources:
+  - storage.yaml
+  - configmap.yml
+  - deployment.yaml
+  - services.yaml              
+
+vars:
+  - name: ZAHORI_DB_HOST
+    objref:
+      kind: Service
+      name: postgres-service
+      apiVersion: v1  
+
